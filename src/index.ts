@@ -204,3 +204,112 @@
 // class BrokenPlane extends Plane {
 // } // error
 //
+// Інтерфейси в TypeScript todo
+// interface Person {
+//     firstName: string,
+//     lastName: string,
+//     age?: number,
+// }
+// function greet(person: Person): void {
+//     console.log(`Hello ${person.firstName} ${person.lastName}`);
+// }
+// const user: Person = {
+//     firstName: 'Bob',
+//     lastName: 'Long',
+//     age: 30,
+// };
+// greet(user);
+//
+// Інтерфейси об'єктів todo
+// interface IPerson {
+//     name: string,
+//     age: number,
+//     greet(phrase: string): void
+// }
+// const user: IPerson = {
+//     name: 'Vasyl',
+//     age: 31,
+//     greet(phrase: string) {
+//         console.log(phrase + ' I am ' + this.name);
+//     },
+// };
+// user.greet('Hello');
+//
+// Інтерфейси класів todo
+// interface IPerson {
+//     name: string;
+//     age: number;
+//     greet(phrase: string): void;
+// }
+// interface IPilot {
+//     flyMessage(): void;
+// }
+// class Pilot implements IPilot, IPerson {
+//     constructor(public name: string, public age: number) {
+//     }
+//     greet(phrase: string) {
+//         console.log(phrase);
+//     }
+//     flyMessage() {
+//         console.log('Літак набрав висоту, всім приємного польоту!');
+//     }
+//     setAutopilot(): void {
+//         console.log('Автопілот увімкнено.');
+//     }
+// }
+// abstract class Plane {
+//     protected pilot?: IPilot;
+//     public sitInPlane(pilot: Pilot): void {
+//         this.pilot = pilot;
+//     }
+//     public abstract startEngine(): boolean
+// }
+//
+// class Boeing extends Plane {
+//     public startEngine(): boolean {
+//         if (!this.pilot) {
+//             throw new Error('No pilot in cabin');
+//         }
+//         console.log('Start engine');
+//
+//         this.pilot.flyMessage();
+//         return true;
+//     }
+// }
+// const boeing = new Boeing();
+// const pilot = new Pilot('Vasyl', 31);
+// pilot.greet('Welcome, blablabla');
+// boeing.sitInPlane(pilot);
+// boeing.startEngine();
+//
+// Readonly
+// interface ITest {
+//     readonly name: string;
+// }
+// const person: ITest = {
+//     name: 'person name',
+// };
+// // person.name = 'Another name'; // Cannot assign to 'name' because it is a read-only property.
+//
+// Extending Interfaces todo
+// interface IUser {
+//     name: string;
+//     age: number;
+// }
+// interface IUserId extends IUser {
+//     id: number;
+// }
+// const user: IUserId = {
+//     name: 'Vasyl',
+//     age: 31,
+//     id: 1,
+// };
+//
+// Інтерфейси як тип функції todo
+// interface IAddFn {
+//     (n1: number, n2: number): number;
+// }
+// let fn1: IAddFn = (n1: number, n2: number): number => {
+//     return n1 + n2;
+// };
+// ------------------------------------------------------------------
