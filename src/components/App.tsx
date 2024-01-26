@@ -1,26 +1,29 @@
 import {AddTodoForm} from './AddTodoForm';
 import {useState} from 'react';
 import {TodoItem} from './TodoItem';
+import {useDispatch, useSelector} from 'react-redux';
+import {selectTodos} from '../store/todo/selectors';
+import {addTodo, deleteTodo} from '../store/todo/todoSlice';
 
 export type ItemType = { id: number, text: string }
 
 const App = () => {
-    const [todoList, setTodoList] = useState<ItemType[]>([]);
+    const todos = useSelector(selectTodos);
+    const dispatch = useDispatch();
 
-    const handleAddTodo = (todo: string) => {
-        const newTodo = {id: Math.random(), text: todo};
-        setTodoList([...todoList, newTodo]);
+    const handleAddTodo = (todoText: string) => {
+        dispatch(addTodo(todoText));
     };
 
     const handleDeleteTodo = (id: number) => {
-        setTodoList(prev => prev.filter(el => el.id !== id));
+        dispatch(deleteTodo(id));
     };
 
     return (
         <div>
             <AddTodoForm handleAddTodo={handleAddTodo}/>
             {
-                todoList.map(el => (
+                todos.map(el => (
                     <TodoItem key={el.id}
                               item={el}
                               handleDeleteTodo={handleDeleteTodo}

@@ -1,4 +1,5 @@
 import React, {FC, useState} from 'react';
+import {addTodo} from '../store/todo/todoSlice';
 
 interface IHandleAddTodo {
     handleAddTodo: (p: string) => void;
@@ -9,6 +10,7 @@ const AddTodoForm: FC<IHandleAddTodo> = ({handleAddTodo}) => {
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const {target: {value}} = e;
+
         setTodoText(value);
     };
 
