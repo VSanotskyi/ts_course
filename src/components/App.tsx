@@ -1,36 +1,38 @@
-import {AddTodoForm} from './AddTodoForm';
-import {useState} from 'react';
-import {TodoItem} from './TodoItem';
-import {useDispatch, useSelector} from 'react-redux';
-import {selectTodos} from '../store/todo/selectors';
-import {addTodo, deleteTodo} from '../store/todo/todoSlice';
+import {Route, Routes} from 'react-router-dom';
 
-export type ItemType = { id: number, text: string }
+import {Layout} from './Layout';
+import {HomePage} from './HomePage';
+import {UserPage} from './UserPage';
+import {TodoPage} from './TodoPage';
+import {UserItemPage} from './UserItemPage';
+import {TodoItemPage} from './TodoItemPage';
 
 const App = () => {
-    const todos = useSelector(selectTodos);
-    const dispatch = useDispatch();
-
-    const handleAddTodo = (todoText: string) => {
-        dispatch(addTodo(todoText));
-    };
-
-    const handleDeleteTodo = (id: number) => {
-        dispatch(deleteTodo(id));
-    };
-
     return (
-        <div>
-            <AddTodoForm handleAddTodo={handleAddTodo}/>
-            {
-                todos.map(el => (
-                    <TodoItem key={el.id}
-                              item={el}
-                              handleDeleteTodo={handleDeleteTodo}
-                    />
-                ))
-            }
-        </div>
+        <Routes>
+            <Route path="/"
+                   element={<Layout/>}
+            >
+                <Route
+                    index
+                    element={<HomePage/>}
+                />
+                <Route
+                    path="/users"
+                    element={<UserPage/>}
+                />
+                <Route
+                    path="/users?/:id"
+                    element={<UserItemPage/>}
+                />
+                <Route path="/todos"
+                       element={<TodoPage/>}
+                />
+                <Route path="/todos/:id"
+                       element={<TodoItemPage/>}
+                />
+            </Route>
+        </Routes>
     );
 };
 

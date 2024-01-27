@@ -1,27 +1,23 @@
 import {FC} from 'react';
-import {ItemType} from './App';
+import {Link, useLocation} from 'react-router-dom';
 
-export interface ITodoItemProps {
-    item: ItemType;
-    handleDeleteTodo: (id: number) => void;
+import {ITodo} from '../../types/types';
+
+interface TodoItemProps {
+    todo: ITodo;
 }
 
-const TodoItem: FC<ITodoItemProps> = ({item, handleDeleteTodo}) => {
-    const {id, text} = item;
+const TodoItem: FC<TodoItemProps> = ({todo}) => {
+    const location = useLocation();
 
     return (
-        <div style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-        }}
+        <Link to={`${todo.id}`}
+              state={location.pathname}
         >
-            <p style={{
-                padding: 0,
-                margin: 0,
-            }}
-            >{text}</p>
-            <button onClick={() => handleDeleteTodo(id)}>Del</button>
-        </div>
+            <div style={{border: '1px solid black'}}>
+                <h3>{todo.id}. {todo.title}</h3>
+            </div>
+        </Link>
     );
 };
 
